@@ -192,3 +192,50 @@ void Rotacion_90(const int Origen[][MAXIMO], int destino[][MAXIMO], int A){ //Fu
     }
 }
 
+//EJERCICIO 16
+
+int Caminos_posibles(int A){
+    int Tablita[CANTIDAD_MAX+1][CANTIDAD_MAX+1];
+    for (int i = 0; i <= A; ++i) {
+        int *Fila_actual = Tablita[i];
+        for (int P = 0; P <= A; ++P) {
+            if(i==0 || P==0){
+                Fila_actual[P] = 1; // solo una forma de llegar al borde
+            }
+            else{
+                Fila_actual[P] = Tablita[i-1][P]+Tablita[i][P-1];
+            }
+        }
+    }
+    return Tablita[A][A];
+}
+
+//EJERCICIO 18
+//método matemático basado en factoriales y divisiones sucesivas, que permite calcular la posición exacta de una permutación
+
+int Factorial(int A){
+    if (A <= 1) return 1;
+    return A * Factorial(A-1);
+}
+//Halal la enesima permutacion lexicografica de los digitos
+void Permutacion_lexicografica( int A, int *Resultado){
+    int Disponibles[NUMERO_DIGITOS] = {0,1,2,3,4,5,6,7,8,9};
+    int Cantidad_Disponibles = NUMERO_DIGITOS;
+    int Indice = A-1; //pasar a base 0
+
+    for (int POSICION = 0; POSICION < NUMERO_DIGITOS; ++POSICION) {
+        int Facto = Factorial(Cantidad_Disponibles-1);
+        int Seleccionado = Indice / Facto;
+        Indice = Indice % Facto;
+
+        Resultado[POSICION] = Disponibles[Seleccionado];
+
+        // eliminar el digito ya usado, recorriendo el resto del arreglo
+        for (int G = Seleccionado; G <Cantidad_Disponibles-1 ; ++G) {
+            Disponibles[G] = Disponibles[G+1];
+        }
+        --Cantidad_Disponibles;
+    }
+}
+
+

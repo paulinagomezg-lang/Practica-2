@@ -108,14 +108,30 @@ int main()
         break;
 
 
+    case 16:
+        cout<<"Ingrese el tamanio de la malla para saer sus posibles caminos :0"<<endl;
+        cin >> A;
+        if (A<0||A > CANTIDAD_MAX){
+            cout<<"Es INVALIDA JIJI"<<endl;
+            return 1;
+        }
+        int Caminitos;
+        Caminitos = Caminos_posibles(A);
+        cout<<" Para una malla de "<<A<<"x"<<A<<" puntos hay "<<Caminitos<<" caminos"<<endl;
+        break;
 
+    case 18:
+        cout<<"Ingrese el numero por el que quieres conocer su permutacion :)"<<endl;
+        cin >>A;
 
-
-
-
-
-
-
+        int Permutacion[NUMERO_DIGITOS];
+        Permutacion_lexicografica(A, Permutacion);
+        cout<<" La permutacion numero "<<A<<" es: ";
+        for (int i = 0; i < NUMERO_DIGITOS; ++i) {
+            cout<<Permutacion[i];
+        }
+        cout<<endl;
+        break;
     }
 
 }
